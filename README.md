@@ -2,6 +2,8 @@
 
 > Fastest proxy using only nginx as the backend server
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 Demo: https://womginx.synricha.org
 
 ## Site compatibility
