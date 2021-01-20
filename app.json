@@ -2,7 +2,7 @@
     "name": "Womginx",
     "description": "Fastest proxy using only nginx as the backend server",
     "repository": "https://github.com/binary-person/womginx",
-    "logo": "https://node-js-sample.herokuapp.com/node.pnghttps://raw.githubusercontent.com/binary-person/womginx/master/public/logo-full.png",
+    "logo": "https://raw.githubusercontent.com/binary-person/womginx/master/public/logo-full.png",
     "keywords": [
         "nginx",
         "docker"
