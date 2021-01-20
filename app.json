@@ -6,5 +6,6 @@
     "keywords": [
         "nginx",
         "docker"
-    ]
+    ],
+    "stack": "container"
 }
