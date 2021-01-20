@@ -6,6 +6,8 @@
 
 Demo: https://womginx.synricha.org
 
+Heroku Docker demo: https://womginx.herokuapp.com
+
 ## Site compatibility
 
 What works:
