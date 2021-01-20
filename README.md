@@ -55,8 +55,8 @@ sudo certbot --nginx certonly -n -d yourdomain.com
 
 ## Part 2 of installation ##
 
-# 1. clone repo
-git clone https://github.com/binary-person/womginx
+# 1. clone repo and wombat submodule
+git clone --recursive https://github.com/binary-person/womginx
 
 # 2. build wombat
 cd womginx/public/wombat
