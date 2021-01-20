@@ -4,7 +4,7 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y nginx git curl
 
 # install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 
 # clone repo
 RUN git clone --recursive https://github.com/binary-person/womginx /opt/womginx
