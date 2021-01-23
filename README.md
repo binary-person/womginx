@@ -6,7 +6,7 @@
 
 Demo: https://womginx.synricha.org
 
-Heroku Docker demo: https://womginx.herokuapp.com
+~~Heroku Docker demo: https://womginx.herokuapp.com~~ taken down for now. If you need one, deploy one using the button above or use the demo link.
 
 ## Site compatibility
 
