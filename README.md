@@ -71,8 +71,8 @@ npm run build-prod
 cd .. # cd into public folder
 sed -i -e 's/womginx.synricha.org/yourdomain.com/g' ../nginx.conf
 
-# 4. replace '/home/binary/public' with your public folder
-sed -i -e "s/\/home\/binary\/public/$(pwd | sed -e 's/\//\\\//g')/g" ../nginx.conf
+# 4. replace '/home/binary/womginx/public' with your public folder
+sed -i -e "s/\/home\/binary\/womginx\/public/$(pwd | sed -e 's/\//\\\//g')/g" ../nginx.conf
 
 # 5. make backup of original nginx.conf
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup

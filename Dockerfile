@@ -11,7 +11,7 @@ RUN git clone --recursive https://github.com/binary-person/womginx /opt/womginx
 
 # build womginx, modify nginx.conf, and copy it to /etc/nginx/nginx.conf
 RUN cd /opt/womginx/public/wombat && npm install && npm run build-prod && cd ..\
-    && sed -i -e "s/\/home\/binary\/public/$(pwd | sed -e 's/\//\\\//g')/g" ../nginx.conf\
+    && sed -i -e "s/\/home\/binary\/womginx\/public/$(pwd | sed -e 's/\//\\\//g')/g" ../nginx.conf\
     && cp ../nginx.conf /etc/nginx/nginx.conf
 
 # remove all ssl entries and replace 'listen 80' with 'listen $PORT'
