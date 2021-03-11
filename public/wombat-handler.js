@@ -107,6 +107,11 @@
         window.Blob = function (data, options = {}) {
             return new window._womginx_Blob(data, options);
         };
+        // add websocket origin support
+        window._womginx_WebSocket = window.WebSocket;
+        window.WebSocket = function(url, protocols) {
+            return new window._womginx_WebSocket(url + '?womginx_ws_origin_header=' + dest_scheme + '://' + dest_host, protocols);
+        };
         // fix rewriteWorker on instances of "TrustedScriptURL"
         // and also rewrite them and fetch the code using synchronous xhr to rewrite them using client js
         window._wb_wombat._womginx_rewriteWorker = window._wb_wombat.rewriteWorker;
