@@ -18,4 +18,5 @@ RUN cd /opt/womginx/public/wombat && npm install && npm run build-prod && cd ..\
 CMD sed -i '/ssl_certificate/d' /etc/nginx/nginx.conf\
     && sed -i '/listen 443/d' /etc/nginx/nginx.conf\
     && sed -i -e "s/listen 80/listen $PORT/" /etc/nginx/nginx.conf\
+    && sed -i -e "s/proxy_set_header Accept-Encoding/proxy_set_header x-request-id '';proxy_set_header x-forwarded-for '';proxy_set_header x-forwarded-proto '';proxy_set_header x-forwarded-port '';proxy_set_header via '';proxy_set_header connect-time '';proxy_set_header x-request-start '';proxy_set_header total-route-time '';proxy_set_header Accept-Encoding/" /etc/nginx/nginx.conf\
     && nginx -g "daemon off;"
