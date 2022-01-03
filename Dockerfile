@@ -5,6 +5,8 @@ RUN apk add git
 COPY . /opt/womginx
 
 WORKDIR /opt/womginx
+# for whatever reason, heroku doesn't copy the .git folder
+RUN git init
 RUN git submodule update --init
 
 WORKDIR /opt/womginx/public/wombat
