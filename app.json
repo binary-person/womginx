@@ -7,5 +7,12 @@
         "nginx",
         "docker"
     ],
-    "stack": "container"
+    "stack": "container",
+    "env": {
+        "SAFE_BROWSING": {
+            "description": "Unset this value to disable. However, if this option is set, then the dns server is set to 1.1.1.3, which blocks malware and adult content. See https://1.1.1.1/family/ for more info",
+            "value": "1",
+            "required": false
+        }
+    }
 }
