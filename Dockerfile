@@ -8,7 +8,12 @@ WORKDIR /opt/womginx
 # for whatever reason, heroku doesn't copy the .git folder and the .gitmodules file, so we're
 # approaching this assuming they don't exist
 RUN git init
-RUN cd public/ && rm -rf wombat && git submodule add https://github.com/webrecorder/wombat
+WORKDIR /opt/womginx/public
+RUN rm -rf wombat && git submodule add https://github.com/webrecorder/wombat
+WORKDIR /opt/womginx/public/wombat
+# wombat's latest version (as of January 4th, 2022; commit 72db794) breaks websocket functionality.
+# Locking the version here temporarily until I can find a solution
+RUN git checkout 78813ad
 
 WORKDIR /opt/womginx/public/wombat
 RUN npm install --legacy-peer-deps && npm run build-prod
