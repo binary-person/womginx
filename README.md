@@ -34,7 +34,20 @@ Ok maybe not just that, you'll need the following:
 4. a (sub)domain
 5. a vps
 
-## Installation
+## Installation (more simple and contained)
+
+1. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
+2. [Install docker-compose](https://docs.docker.com/compose/install/)
+3. Clone this repo by running `git clone https://github.com/binary-person/womginx`
+4. `cd womginx` then edit go and edit `docker-compose.yml`
+    - To disable safe browsing, delete the line that says `SAFE_BROWSING`
+    - To change the port, edit `80:80` to `newport:80`
+    - Don't pay attention to `PORT=80` as changing that only changes the port inside the docker container. Only weird environments like Heroku need it.
+    - To bind the port locally, do `127.0.0.1:80:80` (do this if you're hosting multiple things and you're using a reverse proxy like nginx or caddy)
+5. then run `sudo docker-compose up -d` to start it
+6. `sudo docker-compose down` to stop
+
+## Installation (more complex, direct, and permanent but a little faster)
 
 ```bash
 # assuming you are on Ubuntu/Debian

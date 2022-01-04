@@ -6,8 +6,8 @@ COPY . /opt/womginx
 
 WORKDIR /opt/womginx
 # for whatever reason, heroku doesn't copy the .git folder and the .gitmodules file, so we're
-# approaching this assuming they don't exist
-RUN git init
+# approaching this assuming they will never exist
+RUN rm -rf .git && git init
 WORKDIR /opt/womginx/public
 RUN rm -rf wombat && git submodule add https://github.com/webrecorder/wombat
 WORKDIR /opt/womginx/public/wombat
@@ -15,7 +15,6 @@ WORKDIR /opt/womginx/public/wombat
 # Locking the version here temporarily until I can find a solution
 RUN git checkout 78813ad
 
-WORKDIR /opt/womginx/public/wombat
 RUN npm install --legacy-peer-deps && npm run build-prod
 
 # modify nginx.conf
@@ -25,7 +24,7 @@ WORKDIR /opt/womginx
 RUN sed -i "s/\/home\/binary\/womginx\/public/\/opt\/womginx\/public/g" nginx.conf &&\
 
 # disable ssl (since we're running this behind a reverse proxy like heroku)
-&& sed -i '/ssl_certificate/d' nginx.conf &&\
+sed -i '/ssl_certificate/d' nginx.conf &&\
 sed -i '/listen 443/d' nginx.conf &&\
 
 # prevent reverse proxy headers from being sent to destination site (heroku headers, for example)
