@@ -44,6 +44,7 @@ Ok maybe not just that, you'll need the following:
     - To change the port, edit `80:80` to `newport:80`
     - Don't pay attention to `PORT=80` as changing that only changes the port inside the docker container. Only weird environments like Heroku need it.
     - To bind the port locally, do `127.0.0.1:80:80` (do this if you're hosting multiple things and you're using a reverse proxy like nginx or caddy)
+    - If you are using a reverse proxy, set the `x-forwarded-for` as womginx's rate limiter relies on this header when running in a container. So for nginx, add `proxy_set_header X-Forwarded-For $remote_addr;`
 5. then run `sudo docker-compose up -d` to start it
 6. `sudo docker-compose down` to stop
 7. If you want to update womginx to the latest version, run `git pull && sudo docker-compose up -d --build`
