@@ -1,0 +1,14 @@
+version: "2.1"
+services:
+  womginx:
+    build: .
+    container_name: womginx
+    volumes:
+      - ./docker_nginx.conf:/etc/nginx/nginx.conf
+      - ./docker-entrypoint.sh:/opt/womginx/docker-entrypoint.sh
+    environment:
+      - PORT=80
+      - SAFE_BROWSING=1
+    ports:
+      - 127.0.0.1:8080:80
+    restart: unless-stopped
