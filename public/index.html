@@ -21,7 +21,7 @@
                 function go() {
                     var input = document.getElementById('url-target');
                     if (input.value) {
-                        window.open('/main/' + input.value);
+                        window.location.href = '/main/' + input.value;
                     } else {
                         alert('Please provide a link. It does not require https://.');
                     }
@@ -36,7 +36,7 @@
             <br>
             <br>
             </p>
-            <p class="w3-medium">View GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx">here</a></p>
+            <p class="w3-medium">View GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
         </div>
     </div>
 </body>
