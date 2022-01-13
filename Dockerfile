@@ -17,6 +17,9 @@ RUN git checkout 78813ad
 
 RUN npm install --legacy-peer-deps && npm run build-prod
 
+# delete everything but the dist folder to save us an additional 50MB+
+RUN mv dist .. && rm -rf * .git && mv ../dist/ .
+
 # modify nginx.conf
 WORKDIR /opt/womginx
 
