@@ -1,4 +1,10 @@
 (function () {
+    // rewrite url /main/https:/google.com /main/https://google.com without refreshing the page
+    const rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
+    if (rewriteDoubleSlash) {
+        window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash);
+    }
+
     var proxy_dest_split = window.location.pathname.split(/(?=\/)/);
     var proxy_prefix = window.location.protocol + "//" + window.location.host;
     var proxy_path = proxy_dest_split.shift() + "/";
