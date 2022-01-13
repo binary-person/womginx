@@ -49,7 +49,7 @@ Ok maybe not just that, you'll need the following:
 6. `sudo docker-compose down` to stop
 7. If you want to update womginx to the latest version, run `git pull && sudo docker-compose up -d --build`
 
-## Installation (more complex, direct, and permanent but a little faster)
+## Installation (more complex, direct, and permanent)
 
 ```bash
 # assuming you are on Ubuntu/Debian
