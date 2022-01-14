@@ -1,11 +1,18 @@
 (function () {
     // rewrite url /main/https:/google.com /main/https://google.com without refreshing the page
     var rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
-    var isDoubleSlash = false;
     if (rewriteDoubleSlash) {
-        isDoubleSlash = true;
         window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash);
     }
+    var mergeDoubleSlash = function (url) {
+        // only merge if server forcefully merges and url is not a blob or data
+        if (!rewriteDoubleSlash || !/^((http|ws)s?:\/)/.test(url.toString())) {
+            return url;
+        }
+        // don't merge the real protocol of the url
+        var split = url.toString().split(/(?<=^(?:http|ws)s?:\/\/)/); // turns https://google.com/https://blah.com into ['https://', 'google.com/https://g']
+        return split[0] + split[1].replace(/\/+/g, '/');
+    };
 
     var proxy_dest_split = window.location.pathname.split(/(?=\/)/);
     var proxy_prefix = window.location.protocol + "//" + window.location.host;
@@ -56,6 +63,28 @@
                 window.location.reload();
             }
             return;
+        };
+
+        // auto-merge slashes if server merges them with redirects (which break non-GET requests such as POST)
+        window.XMLHttpRequest.prototype._womginx_open = window.XMLHttpRequest.prototype.open;
+        window.XMLHttpRequest.prototype.open = function (method, url, async, username, password) {
+            return this._womginx_open(method, mergeDoubleSlash(url), async, username, password);
+        };
+        window.XMLHttpRequest.prototype.url
+        window._womginx_fetch = window.fetch;
+        window.fetch = function (input, init) {
+            if (typeof input === 'string') {
+                return window._womginx_fetch(mergeDoubleSlash(input), init);
+            }
+            var request = new Request(input, init);
+            return _womginx_fetch(mergeDoubleSlash(input.url), request);
+        };
+
+        // add websocket origin support and auto-merge slashes
+        window._womginx_WebSocket = window.WebSocket;
+        window.WebSocket = function (url, protocols) {
+            url = url + '?womginx_ws_origin_header=' + dest_scheme + '://' + dest_host;
+            return new window._womginx_WebSocket(mergeDoubleSlash(url), protocols);
         };
 
         // disable Date.now as it breaks hashing functionality in sites like discord
@@ -114,12 +143,6 @@
         window._womginx_Blob = window.Blob;
         window.Blob = function (data, options = {}) {
             return new window._womginx_Blob(data, options);
-        };
-        // add websocket origin support
-        window._womginx_WebSocket = window.WebSocket;
-        window.WebSocket = function(url, protocols) {
-            url = url + '?womginx_ws_origin_header=' + dest_scheme + '://' + dest_host;
-            return new window._womginx_WebSocket(isDoubleSlash ? url.replace(/\/+/g, '/') : url, protocols);
         };
         // fix rewriteWorker on instances of "TrustedScriptURL"
         // and also rewrite them and fetch the code using synchronous xhr to rewrite them using client js
