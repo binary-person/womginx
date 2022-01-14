@@ -1,7 +1,9 @@
 (function () {
     // rewrite url /main/https:/google.com /main/https://google.com without refreshing the page
-    const rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
+    var rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
+    var isDoubleSlash = false;
     if (rewriteDoubleSlash) {
+        isDoubleSlash = true;
         window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash);
     }
 
@@ -116,7 +118,8 @@
         // add websocket origin support
         window._womginx_WebSocket = window.WebSocket;
         window.WebSocket = function(url, protocols) {
-            return new window._womginx_WebSocket(url + '?womginx_ws_origin_header=' + dest_scheme + '://' + dest_host, protocols);
+            url = url + '?womginx_ws_origin_header=' + dest_scheme + '://' + dest_host;
+            return new window._womginx_WebSocket(isDoubleSlash ? url.replace(/\/+/g, '/') : url, protocols);
         };
         // fix rewriteWorker on instances of "TrustedScriptURL"
         // and also rewrite them and fetch the code using synchronous xhr to rewrite them using client js
