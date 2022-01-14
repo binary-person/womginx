@@ -2,7 +2,7 @@
     // rewrite url /main/https:/google.com /main/https://google.com without refreshing the page
     var rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
     if (rewriteDoubleSlash) {
-        window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash);
+        window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash + window.location.hash);
     }
     var mergeDoubleSlash = function (url) {
         // only merge if server forcefully merges and url is not a blob or data
