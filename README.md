@@ -1,9 +1,8 @@
 # Womginx
 
-> Fastest proxy using only nginx as the backend server
-> Modfied main page to look less ugly
+> Womginx, but modfied main page to look less ugly
 
-> for 500 iqs, deploy the site here
+> for 500 iqs, deploy the site here:
 <a href="https://repl.it/github/binary-person/womginx"><img src="https://docs.replit.com/images/repls/run-on-replit.svg" alt="Replit" width="150"/></a>
 
 > Original / Backup site: https://womginx.arph.org
