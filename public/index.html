@@ -9,8 +9,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="shortcut icon" type="image/png" href="logo.png" />
-    <title>NGINX Proxy</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <title>Classes</title>
+    <style>
+    p { margin: 2px 0;}
+    </style>
 </head>
 
 <body>
@@ -23,11 +26,12 @@
                     if (input.value) {
                         window.location.href = '/main/' + input.value;
                     } else {
-                        alert('Please provide a link. It does not require https://.');
+                        window.location.href = '/main/' + "www.google.com";
                     }
                 }
             </script>
-            <span class="w3-xlarge">Input your URL here: </span>
+            <p class="w3-xlarge"> <strong><u>Input your URL here:</u></strong> </p>
+            <p class="w3-medium"> (or, put nothing to go to Google.) </p>
             <div>
                 <input class="w3-xlarge" type='text' placeholder='https://www.google.com' id='url-target'
                     onkeydown='if(event.key==="Enter") go()' />
@@ -35,10 +39,9 @@
             </div>
             <br>
             <br>
-            </p>
-            <span class="w3-medium">Legal stuff: </span>
-            <p class="w3-medium">View Forked GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
-            <p class="w3-medium">View Original GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
+            <p class="w3-medium">Legal stuff: </p>
+            <p class="w3-small">View Forked GitHub source <a class="w3-small" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
+            <p class="w3-small">View Original GitHub source <a class="w3-small" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
         </div>
     </div>
 </body>
