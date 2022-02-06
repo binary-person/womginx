@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<<<<<<< HEAD
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <title>Classes</title>
     <style type="text/css">
@@ -19,6 +20,10 @@
     margin: 200px;
     }
     </style>
+=======
+    <link rel="shortcut icon" type="image/png" href="logo.png" />
+    <title>NGINX Proxy</title>
+>>>>>>> parent of e8b9856 (1.0.0 of website, looks better than original lmfao)
 </head>
 
 <body>
@@ -30,12 +35,11 @@
                     if (input.value) {
                         window.location.href = '/main/' + input.value;
                     } else {
-                        window.location.href = '/main/' + "www.google.com";
+                        alert('Please provide a link. It does not require https://.');
                     }
                 }
             </script>
-            <p class="w3-xlarge"> <strong><u>Input your URL here:</u></strong> </p>
-            <p class="w3-medium"> (or, put nothing to go to Google.) </p>
+            <span class="w3-xlarge">Input your URL here: </span>
             <div>
                 <input class="w3-xlarge" type='text' placeholder='https://www.google.com' id='url-target'
                     onkeydown='if(event.key==="Enter") go()' />
@@ -43,9 +47,10 @@
             </div>
             <br>
             <br>
-            <p class="w3-medium">Legal stuff: </p>
-            <p class="w3-small">View Forked GitHub source <a class="w3-small" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
-            <p class="w3-small">View Original GitHub source <a class="w3-small" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
+            </p>
+            <span class="w3-medium">Legal stuff: </span>
+            <p class="w3-medium">View Forked GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
+            <p class="w3-medium">View Original GitHub source <a class="w3-medium" href="https://github.com/binary-person/womginx" target="_blank">here</a></p>
         </div>
     </div>
 </body>
