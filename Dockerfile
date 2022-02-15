@@ -1,7 +1,7 @@
 FROM node:16-alpine as builder
 
 # build wombat
-RUN apk add git
+RUN apk add git python3 make gcc musl-dev libc-dev g++
 COPY . /opt/womginx
 
 WORKDIR /opt/womginx
