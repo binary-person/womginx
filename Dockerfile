@@ -1,7 +1,8 @@
 FROM node:16-alpine as builder
 
 # build wombat
-RUN apk add git
+RUN apk add git python3 make gcc musl-dev libc-dev g++
+
 COPY . /opt/womginx
 
 WORKDIR /opt/womginx
@@ -15,7 +16,15 @@ WORKDIR /opt/womginx/public/wombat
 # Locking the version here temporarily until I can find a solution
 RUN git checkout 78813ad
 
-RUN npm install --legacy-peer-deps && npm run build-prod
+RUN echo CHECKPOINT 1
+
+RUN npm install --legacy-peer-deps
+
+RUN echo CHECKPOINT 1.5
+
+RUN npm run build-prod
+
+RUN echo CHECKPOINT 2
 
 # delete everything but the dist folder to save us an additional 50MB+
 RUN mv dist .. && rm -rf * .git && mv ../dist/ .
@@ -23,12 +32,18 @@ RUN mv dist .. && rm -rf * .git && mv ../dist/ .
 # modify nginx.conf
 WORKDIR /opt/womginx
 
+RUN ls
+
+RUN echo CHECKPOINT 3
+
 RUN ./docker-sed.sh
+
+RUN echo CHECKPOINT 4
 
 FROM nginx:stable-alpine
 
 # default environment variables in case a normal user doesn't specify it
-ENV PORT=80
+ENV PORT=668
 # set SAFE_BROWSING to any value to enable it
 #ENV SAFE_BROWSING=1
 

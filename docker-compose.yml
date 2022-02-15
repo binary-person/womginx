@@ -4,8 +4,8 @@ services:
     build: .
     container_name: womginx
     environment:
-      - PORT=80
+      - PORT=668
       - SAFE_BROWSING=1
     ports:
-      - 80:80
+      - 668:668
     restart: unless-stopped
