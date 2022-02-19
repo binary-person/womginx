@@ -2,12 +2,13 @@
 
 set -e
 
+export $(grep -v '^#' .env | xargs)
+
 # change public dir to appropriate path
 sed -i "s/\/home\/binary\/womginx\/public/\/opt\/womginx\/public/g" nginx.conf
 
-# disable ssl (since we're running this behind a reverse proxy like heroku)
-sed -i '/ssl_certificate/d' nginx.conf
-sed -i '/listen 443/d' nginx.conf
+# disable ssl (since we're running this behind a reverse proxy like heroku) if there isn't any certs
+if [ -z $SSL ]; then sed -i '/ssl_certificate/d' nginx.conf; fi
 
 # prevent reverse proxy headers from being sent to destination site (heroku headers, for example)
 sed -i $"s/proxy_set_header Accept-Encoding/proxy_set_header x-request-id '';\

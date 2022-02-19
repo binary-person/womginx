@@ -41,12 +41,9 @@ Ok maybe not just that, you'll need the following:
 1. [Install Docker](https://docs.docker.com/engine/install/ubuntu/)
 2. [Install docker-compose](https://docs.docker.com/compose/install/)
 3. Clone this repo by running `git clone https://github.com/binary-person/womginx`
-4. `cd womginx` then edit go and edit `docker-compose.yml`
+4. `cd womginx` then edit go and edit `.env`
     - To disable safe browsing, delete the line that says `SAFE_BROWSING`
-    - To change the port, edit `80:80` to `newport:80`
-    - Don't pay attention to `PORT=80` as changing that only changes the port inside the docker container. Only weird environments like Heroku need it.
-    - To bind the port locally, do `127.0.0.1:80:80` (do this if you're hosting multiple things and you're using a reverse proxy like nginx or caddy)
-    - If you are using a reverse proxy, set the `x-forwarded-for` as womginx's rate limiter relies on this header when running in a container. So for nginx, add `proxy_set_header X-Forwarded-For $remote_addr;`
+    - To change the port, edit `PORT=80` to `newport`
 5. then run `sudo docker-compose up -d` to start it
 6. `sudo docker-compose down` to stop
 7. If you want to update womginx to the latest version, run `git pull && sudo docker-compose up -d --build`
@@ -86,20 +83,24 @@ cd womginx/public/wombat
 npm install
 npm run build-prod
 
-# 3. replace 'womginx.arph.org' with 'yourdomain.com' in nginx.conf
 cd .. # cd into public folder
-sed -i -e 's/womginx.arph.org/yourdomain.com/g' ../nginx.conf
 
-# 4. replace '/home/binary/womginx/public' with your public folder
+# 3. edit `.env` to use the ports/server name/safe browsing settings you want
+nano ../.env
+
+# 3. generate the nginx.conf file
+env $(grep -v '^#' .env | xargs) envsubst '${PORT} ${SERVER_NAME} ${CERT_NAME} ${SSL}' < ../nginx_template.conf > ../nginx.conf
+
+# 5. replace '/home/binary/womginx/public' with your public folder
 sed -i -e "s/\/home\/binary\/womginx\/public/$(pwd | sed -e 's/\//\\\//g')/g" ../nginx.conf
 
-# 5. make backup of original nginx.conf
+# 6. make backup of original nginx.conf
 sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 
-# 6. copy womginx nginx.conf to /etc/nginx/nginx.conf
+# 7. copy womginx nginx.conf to /etc/nginx/nginx.conf
 sudo cp ../nginx.conf /etc/nginx/nginx.conf
 
-# 7. restart the nginx server
+# 8. restart the nginx server
 sudo service nginx restart
 ```
 

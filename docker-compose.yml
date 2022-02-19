@@ -1,11 +1,11 @@
-version: "2.1"
+version: "3.7"
 services:
   womginx:
-    build: .
     container_name: womginx
-    environment:
-      - PORT=668
-      - SAFE_BROWSING=1
     ports:
-      - 668:668
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=80  # For heroku
     restart: unless-stopped
+    build:
+      context: .
