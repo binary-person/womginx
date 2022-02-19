@@ -44,6 +44,7 @@ Ok maybe not just that, you'll need the following:
 4. `cd womginx` then edit go and edit `.env`
     - To disable safe browsing, delete the line that says `SAFE_BROWSING`
     - To change the port, edit `PORT=80` to `newport`
+    - Copy ssl files to `womginx/letsencrypt/live/[your domain]` (if you want https) and set `SSL=ssl` and `CERT_NAME=[your domain]`. Make sure your ssl certs are named `fullchain.pem` and `privkey.pem`.
 5. then run `sudo docker-compose up -d` to start it
 6. `sudo docker-compose down` to stop
 7. If you want to update womginx to the latest version, run `git pull && sudo docker-compose up -d --build`
