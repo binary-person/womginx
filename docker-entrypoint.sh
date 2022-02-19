@@ -2,7 +2,7 @@
 
 set -e
 
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' /opt/womginx/.env | xargs)
 
 if [ ! -z "$SAFE_BROWSING" ]; then
     sed -i "s/1.1.1.1/1.1.1.3/" /etc/nginx/nginx.conf
