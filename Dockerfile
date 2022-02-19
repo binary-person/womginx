@@ -17,9 +17,9 @@ WORKDIR /opt/womginx/public
 RUN rm -rf wombat && git submodule add https://github.com/webrecorder/wombat
 WORKDIR /opt/womginx/public/wombat
 
-# Wombat's latest version (as of January 4th, 2022; commit 72db794) breaks websocket functionality.
+# https://github.com/webrecorder/wombat/commit/4f91f898504caca53dd18e8232dd04cedbc41256 breaks websocket functionality.
 # Locking the version here temporarily until I can find a solution
-RUN git checkout 78813ad
+RUN git checkout d103865
 
 # Tries to install deps, if it fails (bufferutils doesn't have a prebuilt binary),
 # then it installs the required build tools and runs again
@@ -41,8 +41,6 @@ RUN if [ ! -z $(ls /opt/womginx | grep letsencrypt) ]; then cp -r /opt/womginx/l
 
 # Copy nginx config
 RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
-
-RUN cat /etc/nginx/nginx.conf
 
 # make sure nginx.conf works (mainly used for development)
 RUN nginx -t
