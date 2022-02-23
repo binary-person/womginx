@@ -1,18 +1,12 @@
-# Womginx
+# Combat
 
-> Fastest proxy using only nginx as the backend server
+> Combating the school system single-handedly
 
-<a href="https://repl.it/github/binary-person/womginx"><img src="https://docs.replit.com/images/repls/run-on-replit.svg" alt="Replit" width="150"/></a>
+<a href="https://replit.com/@WindowsRefundDa/Combat"><img src="https://docs.replit.com/images/repls/run-on-replit.svg" alt="Replit" width="150"/></a>
 
-**Before you deploy to Heroku, read the following: Heroku decided that this repository violates the ToS, so directly clicking the button below if you're in the main repository will result in an error. Forked repositories may work, though this is not guaranteed. Regardless, I am NOT responsible if your Heroku account gets suspended because of deploying this application. Proceed at your own risk.**
+Website is being worked on, in the meantime, run the code on replit!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-Demo: https://womginx.arph.org
-
-~~Heroku Docker demo: https://womginx.herokuapp.com~~ taken down for now. If you need one, deploy one using the button above or use the demo link.
-
-## Site compatibility
+## Site compatibility (Comming from Womginx)
 
 What works:
 1. recaptcha
@@ -23,7 +17,7 @@ What works:
 What doesn't work:
 1. react sites
 2. sites that depend on window.location and are minified
-3. YouTube UI (however, you can watch a video like https://proxysite.com/main/https://www.youtube.com/watch?v=vidid and it will work)
+3. YouTube UI (Me and V14Riderz are working on that)
 
 ## Prerequisites
 
@@ -51,7 +45,8 @@ Ok maybe not just that, you'll need the following:
 6. `sudo docker-compose down` to stop
 7. If you want to update womginx to the latest version, run `git pull && sudo docker-compose up -d --build`
 
-## Installation (more complex, direct, and permanent)
+## Installation (more complex, direct, and permanent) (Also contains artifacts from Womginx, will be fixed)
+
 
 ```bash
 # assuming you are on Ubuntu/Debian
@@ -79,10 +74,10 @@ sudo certbot --nginx certonly -n -d yourdomain.com
 ## Part 2 of installation ##
 
 # 1. clone repo and wombat submodule
-git clone --recursive https://github.com/binary-person/womginx
+git clone --recursive https://github.com/WindowsRefundDay/Combat/
 
 # 2. build wombat
-cd womginx/public/wombat
+cd combat/public/wombat
 npm install
 npm run build-prod
 
@@ -103,19 +98,20 @@ sudo cp ../nginx.conf /etc/nginx/nginx.conf
 sudo service nginx restart
 ```
 
-## Why did you want to use only nginx and burden yourself with nginx's "restrictive" and "esoteric" config?
+## From Binary-Person: Why did you want to use only nginx and burden yourself with nginx's "restrictive" and "esoteric" config?
 
 I did it as a game, or, challenge, for myself to learn nginx and also to take advantage of nginx's resilience and speed for handling lots of requests, which is perfect for proxying.
 
 It also was to deter nginx's restrictive reputation (in a community server I'm in).
 
-## Contributing
+## Editing
 
-Contributions are welcome. Send in a pull request and I'll be more than happy to take a look.
+Contributions are open but some changes will be made privately so WCPSS can't find ways to block it
 
 ## Future plans
+    - YouTube UI fix
+    - More website supports (
 
-Make another client rewriting library similar to wombat but made with intent to be a proxy rewriting library and with the goal of ease of use for the server and the client.
 
 ## License
 
