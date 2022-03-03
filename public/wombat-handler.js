@@ -10,8 +10,7 @@
             return url;
         }
         // don't merge the real protocol of the url
-        var split = url.toString().split(/(?<=^(?:http|ws)s?:\/\/)/); // turns https://google.com/https://blah.com into ['https://', 'google.com/https://g']
-        return split[0] + split[1].replace(/\/+/g, '/');
+        return url.toString().slice(0, 7) + url.toString().slice(7).replace(/\/+/g, '/');
     };
 
     var proxy_dest_split = window.location.pathname.split(/(?=\/)/);
