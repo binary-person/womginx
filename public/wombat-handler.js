@@ -10,8 +10,7 @@
             return url;
         }
         // don't merge the real protocol of the url
-        var split = url.toString().split(/(?<=^(?:http|ws)s?:\/\/)/); // turns https://google.com/https://blah.com into ['https://', 'google.com/https://g']
-        return split[0] + split[1].replace(/\/+/g, '/');
+        return url.toString().slice(0, 7) + url.toString().slice(7).replace(/\/+/g, '/');
     };
 
     var proxy_dest_split = window.location.pathname.split(/(?=\/)/);
@@ -53,16 +52,6 @@
                 url = "";
             }
             return this._womginx_replaceState(stateObj, title, url);
-        };
-
-        // force reload discord when it pushStates to discord.com/app to fix broken UI
-        window.history._womginx_pushState = window.history.pushState;
-        window.history.pushState = function (stateObj, title, url) {
-            this._womginx_pushState(stateObj, title, url);
-            if (url === proxy_prefix + proxy_path + "https://discord.com/app") {
-                window.location.reload();
-            }
-            return;
         };
 
         // auto-merge slashes if server merges them with redirects (which break non-GET requests such as POST)
@@ -113,7 +102,7 @@
                 timeoutLocalStorage = setTimeout(function () {
                     timeoutLocalStorage = -1;
                     localStorageSetItem.call(localStorage, dest_host, JSON.stringify(hostLocalStorage));
-                }, 100);
+                }, 50);
             }
         };
         localStorage.key = function (number) {
@@ -317,13 +306,6 @@
             },
             get pathname() {
                 updateLocationObj();
-                // https://discord.com/(app|channels) breaks if pathname is rewritten, and is the only site
-                // that does this, so I am hard coding an exception. However, the discord.com "breaks"
-                // if the pathname is *not* rewritten since not rewriting it "breaks" the code which
-                // upon successful execution, will break the website. So.. breaking the code to not break the site
-                if (/^https:\/\/discord\.com\/(app|channels)/.test(locationObj.href)) {
-                    return window.location.pathname;
-                }
                 return locationObj.pathname;
             },
             set pathname(value) {
