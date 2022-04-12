@@ -26,6 +26,10 @@
                         alert('Please provide a link. It does not require https://.');
                     }
                 }
+                
+                window.onload = function() {
+                  document.getElementById("url-target").focus();
+                }
             </script>
             <span class="w3-xlarge">Input your URL here: </span>
             <div>
