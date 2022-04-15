@@ -8,6 +8,8 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/bFBWOL?referralCode=erics)
+
 Demo: https://womginx.arph.org
 
 ~~Heroku Docker demo: https://womginx.herokuapp.com~~ taken down for now. If you need one, deploy one using the button above or use the demo link.
